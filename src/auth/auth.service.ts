@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/entities/user.entity';
@@ -12,7 +13,7 @@ import { plainToClass } from 'class-transformer';
 import { Status } from 'src/statuses/entities/status.entity';
 import { Role } from 'src/roles/entities/role.entity';
 import { AuthProvidersEnum } from './auth-providers.enum';
-import { SocialInterface } from 'src/social/interfaces/social.interface';
+// import { SocialInterface } from 'src/social/interfaces/social.interface';
 import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
 import { UsersService } from 'src/users/users.service';
 import { ForgotService } from 'src/forgot/forgot.service';
@@ -90,62 +91,62 @@ export class AuthService {
     }
   }
 
-  async validateSocialLogin(
-    authProvider: string,
-    socialData: SocialInterface,
-  ): Promise<{ token: string; user: User }> {
-    let user: User;
-    const socialEmail = socialData.email?.toLowerCase();
+  // async validateSocialLogin(
+  //   authProvider: string,
+  //   socialData: SocialInterface,
+  // ): Promise<{ token: string; user: User }> {
+  //   let user: User;
+  //   const socialEmail = socialData.email?.toLowerCase();
 
-    const userByEmail = await this.usersService.findOne({
-      email: socialEmail,
-    });
+  //   const userByEmail = await this.usersService.findOne({
+  //     email: socialEmail,
+  //   });
 
-    user = await this.usersService.findOne({
-      socialId: socialData.id,
-      provider: authProvider,
-    });
+  //   user = await this.usersService.findOne({
+  //     socialId: socialData.id,
+  //     provider: authProvider,
+  //   });
 
-    if (user) {
-      if (socialEmail && !userByEmail) {
-        user.email = socialEmail;
-      }
-      await this.usersService.update(user.id, user);
-    } else if (userByEmail) {
-      user = userByEmail;
-    } else {
-      const role = plainToClass(Role, {
-        id: RoleEnum.user,
-      });
-      const status = plainToClass(Status, {
-        id: StatusEnum.active,
-      });
+  //   if (user) {
+  //     if (socialEmail && !userByEmail) {
+  //       user.email = socialEmail;
+  //     }
+  //     await this.usersService.update(user.id, user);
+  //   } else if (userByEmail) {
+  //     user = userByEmail;
+  //   } else {
+  //     const role = plainToClass(Role, {
+  //       id: RoleEnum.user,
+  //     });
+  //     const status = plainToClass(Status, {
+  //       id: StatusEnum.active,
+  //     });
 
-      user = await this.usersService.create({
-        email: socialEmail,
-        firstName: socialData.firstName,
-        lastName: socialData.lastName,
-        socialId: socialData.id,
-        provider: authProvider,
-        role,
-        status,
-      });
+  //     user = await this.usersService.create({
+  //       email: socialEmail,
+  //       firstName: socialData.firstName,
+  //       lastName: socialData.lastName,
+  //       socialId: socialData.id,
+  //       provider: authProvider,
+  //       role,
+  //       status,
+  //     });
 
-      user = await this.usersService.findOne({
-        id: user.id,
-      });
-    }
+  //     user = await this.usersService.findOne({
+  //       id: user.id,
+  //     });
+  //   }
 
-    const jwtToken = await this.jwtService.sign({
-      id: user.id,
-      role: user.role,
-    });
+  //   const jwtToken = await this.jwtService.sign({
+  //     id: user.id,
+  //     role: user.role,
+  //   });
 
-    return {
-      token: jwtToken,
-      user,
-    };
-  }
+  //   return {
+  //     token: jwtToken,
+  //     user,
+  //   };
+  // }
 
   async register(dto: AuthRegisterLoginDto): Promise<void> {
     const hash = crypto
@@ -165,12 +166,12 @@ export class AuthService {
       hash,
     });
 
-    await this.mailService.userSignUp({
-      to: user.email,
-      data: {
-        hash,
-      },
-    });
+    // await this.mailService.userSignUp({
+    //   to: user.email,
+    //   data: {
+    //     hash,
+    //   },
+    // });
   }
 
   async confirmEmail(hash: string): Promise<void> {

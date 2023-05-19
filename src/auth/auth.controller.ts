@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
@@ -29,23 +30,23 @@ import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
 export class AuthController {
   constructor(public service: AuthService) {}
 
-  @SerializeOptions({
-    groups: ['me'],
-  })
+  // @SerializeOptions({
+  //   groups: ['me'],
+  // })
   @Post('email/login')
   @HttpCode(HttpStatus.OK)
   public async login(@Body() loginDto: AuthEmailLoginDto) {
     return this.service.validateLogin(loginDto, false);
   }
 
-  @SerializeOptions({
-    groups: ['me'],
-  })
-  @Post('admin/email/login')
-  @HttpCode(HttpStatus.OK)
-  public async adminLogin(@Body() loginDTO: AuthEmailLoginDto) {
-    return this.service.validateLogin(loginDTO, true);
-  }
+  // @SerializeOptions({
+  //   groups: ['me'],
+  // })
+  // @Post('admin/email/login')
+  // @HttpCode(HttpStatus.OK)
+  // public async adminLogin(@Body() loginDTO: AuthEmailLoginDto) {
+  //   return this.service.validateLogin(loginDTO, true);
+  // }
 
   @Post('email/register')
   @HttpCode(HttpStatus.CREATED)
@@ -75,9 +76,9 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
-  @SerializeOptions({
-    groups: ['me'],
-  })
+  // @SerializeOptions({
+  //   groups: ['me'],
+  // })
   @Get('me')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.OK)
@@ -86,9 +87,9 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
-  @SerializeOptions({
-    groups: ['me'],
-  })
+  // @SerializeOptions({
+  //   groups: ['me'],
+  // })
   @Patch('me')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.OK)

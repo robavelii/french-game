@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export enum AuthProvidersEnum {
   email = 'email',
   facebook = 'facebook',
