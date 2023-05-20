@@ -5,7 +5,7 @@ import { MasculineEnding } from './entities/masculineEndings.entity';
 import { FeminineEnding } from './entities/feminineEndings.entity';
 
 @Injectable()
-export class FrenchWordSeedService {
+export class FrenchWordEndingSeedService {
   constructor(
     @InjectRepository(MasculineEnding)
     private masculineEndingRepository: Repository<MasculineEnding>,

@@ -20,13 +20,13 @@ export class PopulateEndings1684427807481 implements MigrationInterface {
       ],
     };
 
-    for (let ending of masculineEndings) {
+    for (const ending of masculineEndings) {
       await queryRunner.query(
         `INSERT INTO MasculineEndings (ending) VALUES (${ending})`,
       );
     }
 
-    for (let ending of feminineEndings) {
+    for (const ending of feminineEndings) {
       await queryRunner.query(
         `INSERT INTO FeminineEndings (ending) VALUES (${ending})`,
       );

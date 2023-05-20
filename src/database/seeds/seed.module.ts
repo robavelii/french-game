@@ -9,6 +9,7 @@ import { RoleSeedModule } from './role/role-seed.module';
 import { StatusSeedModule } from './status/status-seed.module';
 import { UserSeedModule } from './user/user-seed.module';
 import { FrenchWordSeedModule } from './endings/endings-seed.module';
+import { WordSeederModule } from './words/words-seed.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { FrenchWordSeedModule } from './endings/endings-seed.module';
     StatusSeedModule,
     UserSeedModule,
     FrenchWordSeedModule,
+    WordSeederModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [databaseConfig, appConfig],
