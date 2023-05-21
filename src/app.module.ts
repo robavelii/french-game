@@ -19,6 +19,8 @@ import { ForgotModule } from './forgot/forgot.module';
 import { MailModule } from './mail/mail.module';
 import { HomeModule } from './home/home.module';
 import { DataSource } from 'typeorm';
+import { GameModule } from './game/game.module';
+import { WordModule } from './word/word.module';
 
 @Module({
   imports: [
@@ -57,10 +59,11 @@ import { DataSource } from 'typeorm';
     UsersModule,
     FilesModule,
     AuthModule,
-
     ForgotModule,
     MailModule,
     HomeModule,
+    GameModule,
+    WordModule,
   ],
 })
 export class AppModule {}
