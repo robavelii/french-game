@@ -44,6 +44,16 @@ export class WordController {
   async getRandomWord() {
     return this.wordService.getRandomWord();
   }
+  @Get('masculine')
+  @HttpCode(HttpStatus.OK)
+  async getMasculineEnding() {
+    return this.wordService.getMasculineEndings();
+  }
+  @Get('feminine')
+  @HttpCode(HttpStatus.OK)
+  async getFeminineEnding() {
+    return this.wordService.getFeminineEndings();
+  }
 
   @Get('example')
   @HttpCode(HttpStatus.OK)

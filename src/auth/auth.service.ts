@@ -255,10 +255,20 @@ export class AuthService {
     await this.forgotService.softDelete(forgot.id);
   }
 
-  async me(user: User): Promise<User> {
-    return this.usersService.findOne({
+  async me(user: User): Promise<any> {
+    const userDetials = await this.usersService.findOne({
       id: user.id,
     });
+    if (userDetials) {
+      return {
+        id: userDetials.id,
+        firstName: userDetials.firstName,
+        lastName: userDetials.lastName,
+        email: userDetials.email,
+      };
+    } else {
+      throw new Error('User doesnt exist');
+    }
   }
 
   async update(user: User, userDto: AuthUpdateDto): Promise<User> {

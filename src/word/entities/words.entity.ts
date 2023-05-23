@@ -1,5 +1,6 @@
+import { GameProgress } from 'src/game/entities/game.entity';
 import { EntityHelper } from 'src/utils/entity-helper';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class Word extends EntityHelper {
@@ -23,4 +24,7 @@ export class Word extends EntityHelper {
 
   @Column('json')
   example: { phrase: string; translation_en: string };
+
+  @OneToMany(() => GameProgress, (gameProgress) => gameProgress.word)
+  game_progress: GameProgress[];
 }

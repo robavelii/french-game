@@ -1,15 +1,31 @@
-// import { Word } from 'src/database/seeds/words/entities/words.entity';
-// import { User } from 'src/users/entities/user.entity';
-// import { EntityHelper } from 'src/utils/entity-helper';
-// import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { EntityHelper } from 'src/utils/entity-helper';
+import { Word } from 'src/word/entities/words.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-// @Entity()
-// export class Game extends EntityHelper {
-//   @PrimaryGeneratedColumn()
-//   id: number;
+@Entity()
+export class GameProgress extends EntityHelper {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-//   @Column()
-//   user: User;
-//   @Column()
-//   word: Word[];
-// }
+  @Column()
+  userId: number;
+
+  @ManyToOne(() => Word, (word) => word.game_progress)
+  @JoinColumn({ name: 'wordId' })
+  word: Word;
+
+  @Column()
+  wordId: number;
+
+  @Column()
+  known: boolean;
+
+  @Column()
+  createdAt: Date;
+}
