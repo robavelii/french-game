@@ -31,30 +31,16 @@ export class GameService {
   async getWellKnownWords(userId: number): Promise<GameProgress[]> {
     // Get all words that the user has marked as known
     const query = this.gameRepository
-      .createQueryBuilder('game')
-      .leftJoinAndSelect('game.word', 'word')
-      .leftJoin('game.progress', 'progress', 'progress.userId = :userId', {
-        userId,
-      })
-      .where('progress.known = true')
-      .andWhere('game.userId=:userId', { userId })
-      .select(['game.id', 'word.word']);
+      .createQueryBuilder('gameprogress')
+      .leftJoinAndSelect('gameprogress.word', 'word')
+      .where('gameprogress.known = true')
+      .andWhere('gameprogress.userId=:userId', { userId })
+      .select(['gameprogress.id', 'word.word']);
 
     return await query.getMany();
   }
 
   async getLearnedWords(userId: number): Promise<GameProgress[]> {
-    // Get all words that the user has marked as known
-    // const query = this.gameRepository
-    //   .createQueryBuilder('game')
-    //   .leftJoinAndSelect('game.word', 'word')
-    //   .leftJoin('game.progress', 'progress', 'progress.userId = :userId', {
-    //     userId,
-    //   })
-    //   .where('progress.known = true')
-    //   .andWhere('game.userId=:userId', { userId })
-    //   .select(['game.id', 'wordId.word']);
-
     const query = await this.gameRepository
       .createQueryBuilder('gameprogress')
       .leftJoinAndSelect('gameprogress.word', 'word')
